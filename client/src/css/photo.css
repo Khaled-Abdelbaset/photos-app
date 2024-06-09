@@ -1,0 +1,17 @@
+.card  {
+  position: relative;
+}
+.card:hover:before {
+  content: "+";
+  background-color: rgba(55, 104, 104, 0.356);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 80px;
+  color: #EEE;
+}

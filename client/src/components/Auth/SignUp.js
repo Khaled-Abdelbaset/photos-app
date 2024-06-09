@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/config";
-import { TextField, Button, Container, Box } from "@mui/material";
+import { Link } from "react-router-dom";
+import { TextField, Button, Container, Box, Typography } from "@mui/material";
 
 const SignUp = () => {
   // State variables for form fields and error handling
@@ -63,7 +64,7 @@ const SignUp = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        height: "100vh",
+        height: "70vh",
       }}
     >
       <Box
@@ -76,6 +77,12 @@ const SignUp = () => {
           gap: 2,
         }}
       >
+        <Typography
+          variant="h4"
+          sx={{ color: "gray", marginBottom: "1rem", margin: "auto" }}
+        >
+          Sign Up
+        </Typography>
         {/* Email input field */}
         <TextField
           label="Email"
@@ -94,21 +101,27 @@ const SignUp = () => {
           fullWidth
         />
         {/* Sign Up button */}
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          sx={{ mt: 2 }}
-        >
+        <Button type="submit" variant="contained" color="primary">
           Sign Up
         </Button>
+
+        {/* Error message display */}
+        {error && (
+          <p
+            style={{
+              color: "red",
+              textTransform: "capitalize",
+              margin: "0",
+              textAlign: "center",
+            }}
+          >
+            {error}
+          </p>
+        )}
       </Box>
-      {/* Error message display */}
-      {error && (
-        <Box sx={{ color: "red", textTransform: "capitalize" }}>
-          <p>{error}</p>
-        </Box>
-      )}
+      <Typography variant="body1" sx={{ marginTop: 2 }}>
+        Already have an account? <Link to="/signin">Sign in</Link>
+      </Typography>
     </Container>
   );
 };

@@ -1,21 +1,24 @@
 import { Card, CardMedia, CardContent, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { addToFavourite } from "../../services/api";
+import { useDispatch } from "react-redux";
+import { addToFavourites } from "../../stores/favouritesSlice";
 import { toast } from "react-toastify";
 
 import "../../css/photo.css";
 
 const Image = ({ image }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const handleAddToFavourite = async () => {
     try {
-      await addToFavourite(image);
+      await dispatch(addToFavourites(image)).unwrap();
       toast.success("Image Added successfully");
-      } catch (error) {
-        const status = error.response.status;
-        const message = error.response.data.message;
-        switch (status) {
-          case 400:
+    } catch (error) {
+      const status = error.status;
+      const message = error.data.message;
+      switch (status) {
+        case 400:
           toast.error(message);
           break;
         default:

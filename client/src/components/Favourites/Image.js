@@ -17,11 +17,13 @@ const Image = ({ image }) => {
 
   const handleDeleteImage = async () => {
     try {
-      await dispatch(deleteFavourite(image.id)).unwrap();
+      await dispatch(
+        deleteFavourite(image.id)
+      ).unwrap();
       toast.success("Image deleted successfully");
     } catch (error) {
-      const status = error.response.status;
-      const message = error.response.data.message;
+      const status = error.status;
+      const message = error.data.message;
       switch (status) {
         case 400:
           toast.error(message);
@@ -37,7 +39,7 @@ const Image = ({ image }) => {
       <CardMedia
         component="img"
         height="250"
-        image={image.src.medium}
+        image={image.src}
         alt={image.photographer}
       />
       <CardContent>

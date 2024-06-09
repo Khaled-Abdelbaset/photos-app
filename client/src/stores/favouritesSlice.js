@@ -1,27 +1,55 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+
 const BASE_URL = "http://127.0.0.1:8000/api/images";
 
 export const getFavourites = createAsyncThunk(
   "favourites/getFavourites",
-  async () => {
+  async ({ rejectWithValue }) => {
     try {
-      const response = await axios.get(`${BASE_URL}`);
+      const response = await axios.get(`${BASE_URL}`, {
+        headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` },
+      });
       return response.data;
     } catch (error) {
-      throw error;
+      return rejectWithValue(error.response);
+    }
+  }
+);
+
+export const addToFavourites = createAsyncThunk(
+  "favourites/addToFavourites",
+  async (image, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}`,
+        {
+          src: image.src.medium,
+          photographer: image.photographer,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response);
     }
   }
 );
 
 export const deleteFavourite = createAsyncThunk(
   "favourites/deleteFavourite",
-  async (id) => {
+  async (id, { rejectWithValue }) => {
     try {
-      const response = await axios.delete(`${BASE_URL}/${id}`);
+      const response = await axios.delete(`${BASE_URL}/${id}`, {
+        headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` },
+      });
       return response.data;
     } catch (error) {
-      throw error;
+      return rejectWithValue(error.response);
     }
   }
 );

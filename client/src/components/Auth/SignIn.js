@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { Link } from "react-router-dom";
 import { auth } from "../../firebase/config";
-import { TextField, Button, Container, Box } from "@mui/material";
+import { TextField, Button, Container, Box, Typography } from "@mui/material";
 
 const SignIn = () => {
   // State variables for form fields and error handling
@@ -28,8 +29,18 @@ const SignIn = () => {
 
     try {
       // Sign-in using Firebase auth
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
+      // Get the user's token
+      const token = await userCredential.user.getIdToken();
+
+      // Save the token in session storage
+      sessionStorage.setItem("token", token);
+      
       // Navigate to home page after successful sign-in
       navigate("/");
     } catch (error) {
@@ -62,7 +73,7 @@ const SignIn = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        height: "100vh",
+        height: "70vh",
       }}
     >
       <Box
@@ -75,6 +86,12 @@ const SignIn = () => {
           gap: 2,
         }}
       >
+        <Typography
+          variant="h4"
+          sx={{ color: "gray", marginBottom: ".5rem", margin: "auto" }}
+        >
+          Sign In
+        </Typography>
         {/* Email input field */}
         <TextField
           label="Email"
@@ -82,7 +99,6 @@ const SignIn = () => {
           onChange={(e) => setEmail(e.target.value)}
           fullWidth
           onFocus={() => setError("")}
-          sx={{ marginTop: 2 }}
         />
         {/* Password input field */}
         <TextField
@@ -92,25 +108,21 @@ const SignIn = () => {
           onChange={(e) => setPassword(e.target.value)}
           fullWidth
           onFocus={() => setError("")}
-          sx={{ marginTop: 2 }}
         />
         {/* Sign In button */}
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          fullWidth
-          sx={{ marginTop: 2 }}
-        >
+        <Button type="submit" variant="contained" color="primary" fullWidth>
           Sign In
         </Button>
+        {/* Error message display */}
+        {error && (
+          <p style={{ color: "red", textTransform: "capitalize", margin: "0", textAlign: "center" }}>
+            {error}
+          </p>
+        )}
       </Box>
-      {/* Error message display */}
-      {error && (
-        <Box sx={{ color: "red", textTransform: "capitalize" }}>
-          <p>{error}</p>
-        </Box>
-      )}
+      <Typography variant="body1" sx={{ marginTop: 2 }}>
+        Don't have an account? <Link to="/signup">Sign up</Link>
+      </Typography>
     </Container>
   );
 };

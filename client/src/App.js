@@ -1,4 +1,4 @@
-import React from "react";
+import Navbar from "./components/Navbar";
 import SignUp from "./components/Auth/SignUp";
 import SignIn from "./components/Auth/SignIn";
 import Home from "./components/Home/Home";
@@ -15,6 +15,7 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/favourites" element={<Favourites />} />
@@ -24,7 +25,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
-      <ToastContainer position="top-center" autoClose={2500}  />
+      <ToastContainer position="top-center" autoClose={1500}  />
     </Provider>
   );
 }

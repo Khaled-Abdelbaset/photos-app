@@ -3,7 +3,7 @@
 }
 .add-image:hover:before {
   content: "+";
-  background-color: rgba(55, 104, 104, 0.356);
+  background-color: rgba(55, 78, 104, 0.356);
   position: absolute;
   top: 0;
   left: 0;

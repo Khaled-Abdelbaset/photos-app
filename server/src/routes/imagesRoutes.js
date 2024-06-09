@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { authenticateUser } = require("../middleware/authMiddleware");
 const {
   createImage,
   getAllImages,
@@ -8,6 +9,8 @@ const {
   deleteImage,
   checkID,
 } = require("../controller/imagesController");
+
+router.use(authenticateUser);
 
 router.param("id", checkID);
 

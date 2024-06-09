@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getPhotos, selectAllPhotos } from "../../stores/photosSlice";
-import Photo from "./Photo";
+import { getImages} from "../../stores/imagesSlice";
+import Image from "./Image";
 import {
   Container,
   Grid,
@@ -13,13 +13,13 @@ import {
 
 const Home = () => {
   const dispatch = useDispatch();
-  const photos = useSelector(selectAllPhotos);
-  const status = useSelector((state) => state.photos.status);
+  const images = useSelector((state) => state.images.images);
+  const status = useSelector((state) => state.images.status);
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getPhotos(page));
+    dispatch(getImages(page));
   }, [dispatch, page]);
 
   return (
@@ -35,9 +35,9 @@ const Home = () => {
       {status === "succeeded" && (
         <Container>
           <Grid container spacing={3} style={{ padding: 20 }}>
-            {photos.map((photo) => (
-              <Grid item xs={12} sm={6} md={4} key={photo.id}>
-                <Photo photo={photo} />
+            {images.map((image) => (
+              <Grid item xs={12} sm={6} md={4} key={image.id}>
+                <Image image={image} />
               </Grid>
             ))}
           </Grid>
@@ -47,7 +47,7 @@ const Home = () => {
             </IconButton>
             <IconButton
               onClick={() => setPage(page + 1)}
-              disabled={photos.length === 0}
+              disabled={images.length === 0}
             >
               ➡
             </IconButton>

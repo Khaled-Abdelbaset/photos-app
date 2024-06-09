@@ -1,7 +1,7 @@
-.card  {
+.add-image  {
   position: relative;
 }
-.card:hover:before {
+.add-image:hover:before {
   content: "+";
   background-color: rgba(55, 104, 104, 0.356);
   position: absolute;

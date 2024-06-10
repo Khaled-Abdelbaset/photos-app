@@ -79,6 +79,7 @@ The frontend will be accessible at http://localhost:3000.
 - React Router
 - Axios
 - Material-UI
+- toastify
 
 
 

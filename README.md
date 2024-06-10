@@ -1,68 +1,33 @@
-##Photos Application
-    This project provides a web application for managing images using a Node.js backend and a React frontend.
-    Users can perform CRUD operations on images and shorten image links using external APIs.
+# Photos Application
 
-##Description
-    This project provides a full-stack solution for image management,
-    combining a Node.js backend for handling server-side logic and a React frontend for providing an interactive user interface.
-    Users can perform CRUD operations on images stored in a database and shorten image links using external APIs.
+This project provides a web application for managing images using a Node.js backend and a React frontend. Users can perform CRUD operations on images and shorten image links using external APIs.
 
-##Features
-    1. Create, read, update, and delete images.
-    2. Shorten image links using external APIs.
-    3. User authentication and authorization.
-    4. Responsive and user-friendly React frontend.
+## Description
 
-##Getting Started
-  -Follow these steps to set up the project locally.
+This project provides a full-stack solution for image management, combining a Node.js backend for handling server-side logic and a React frontend for providing an interactive user interface. Users can perform CRUD operations on images stored in a database and shorten image links using external APIs.
 
-#Prerequisites
-    1. Node.js and npm installed on your machine.
-    2. Access to Firebase Firestore or a similar database.
-    3. API key for an external URL shortening service (optional).
+## Features
 
-##Installation
+1. Create, read, update, and delete images.
+2. Shorten image links using external APIs.
+3. User authentication and authorization.
+4. Responsive and user-friendly React frontend.
 
-#Clone the repository:
-  git clone https://github.com/your-username/image-management.git
-  
-#Navigate to the server directory:
-  -cd server
+## Getting Started
 
-#Install node.js dependencies:
-  -npm install
+Follow these steps to set up the project locally.
 
-#Navigate to the client directory:
-  cd ../client
-  
-#Install react.js dependencies:
-  -npm install
-  
-#To start node.js server, run:
-  -cd server
-  -npm start
+### Prerequisites
 
-#To start react.js server, run:
-  -cd frontend
-  -npm start
-  -The frontend will be accessible at http://localhost:3000.
+1. Node.js and npm installed on your machine.
+2. Access to Firebase Firestore or a similar database.
+3. API key for an external URL shortening service (optional).
 
-##API Endpoints
-    1. POST /api/images: Create a new image.
-    2. GET /api/images: Retrieve all images.
-    3. GET /api/images/:id: Retrieve a specific image by ID.
-    4. PUT /api/images/:id: Update a specific image by ID.
-    5. DELETE /api/images/:id: Delete a specific image by ID.
-    6. POST /api/images/shorten: Shorten an image link.
+### Installation
 
-##Built With
-  1. Backend
-    -Node.js
-    -Express
-    -Firebase Firestore
-    -Axios
-  2. Frontend
-    -React
-    -React Router
-    -Axios
-    -Material-UI
+1. Clone the repository:
+git clone https://github.com/your-username/image-management.git
+
+
+2. Navigate to the server directory:
+cd server

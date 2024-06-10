@@ -15,13 +15,15 @@ const Image = ({ image }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // Function to handle deletion of the image
   const handleDeleteImage = async () => {
     try {
-      await dispatch(
-        deleteFavourite(image.id)
-      ).unwrap();
+      // Dispatch deleteFavourite action to delete the image
+      await dispatch(deleteFavourite(image.id));
+      // Show success message
       toast.success("Image deleted successfully");
     } catch (error) {
+      // Handle errors
       const status = error.status;
       const message = error.data.message;
       switch (status) {
@@ -29,13 +31,16 @@ const Image = ({ image }) => {
           toast.error(message);
           break;
         default:
+          // Redirect to server error page for other errors
           navigate("server-error");
       }
     }
   };
 
   return (
-    <Card className={""}>
+    // Card component to display the image
+    <Card>
+      {/* Display image */}
       <CardMedia
         component="img"
         height="250"
@@ -43,9 +48,11 @@ const Image = ({ image }) => {
         alt={image.photographer}
       />
       <CardContent>
+        {/* Display photographer name */}
         <Typography variant="subtitle1" style={{ textAlign: "center" }}>
           {image.photographer}
         </Typography>
+        {/* Button to delete image */}
         <Button
           type="submit"
           variant="contained"

@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { Link } from "react-router-dom";
 import { TextField, Button, Container, Box, Typography } from "@mui/material";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   // State variables for form fields and error handling
@@ -30,7 +31,8 @@ const SignUp = () => {
     try {
       // Sign-up using Firebase auth
       await createUserWithEmailAndPassword(auth, email, password);
-
+      toast.success("Account created successfully");
+      
       // Navigate to sign-in page after successful sign-up
       navigate("/signin");
     } catch (error) {

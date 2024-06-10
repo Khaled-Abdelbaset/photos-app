@@ -2,6 +2,7 @@ const { db } = require("../services/firebase");
 
 const imagesCollection = "favourite_images";
 
+// Middleware to check if image ID exists in user's favourites
 exports.checkID = async (req, res, next, val) => {
   try {
     const userId = req.user.uid;
@@ -23,10 +24,13 @@ exports.checkID = async (req, res, next, val) => {
   }
 };
 
+// Create a new image in user's favourites
 exports.createImage = async (req, res) => {
   try {
     const userId = req.user.uid;
     const { src, photographer } = req.body;
+
+    // Check if image already exists in favourites
     const image = await db
       .collection(imagesCollection)
       .doc(userId)
@@ -36,11 +40,12 @@ exports.createImage = async (req, res) => {
     if (!image.empty) {
       return res.status(400).json({
         status: "failed",
-        message: "This image already in your favourites",
+        message: "Image already in your favourites",
       });
     }
 
     const newImage = { src, photographer };
+    // Add new image to favourites collection
     const ref = await db
       .collection(imagesCollection)
       .doc(userId)
@@ -52,9 +57,11 @@ exports.createImage = async (req, res) => {
   }
 };
 
+// Get all images from user's favourites
 exports.getAllImages = async (req, res) => {
   try {
     const userId = req.user.uid;
+    // Fetch all images from favourites collection
     const collection = await db
       .collection(imagesCollection)
       .doc(userId)
@@ -70,9 +77,11 @@ exports.getAllImages = async (req, res) => {
   }
 };
 
+// Get an image by its ID from user's favourites
 exports.getImageById = async (req, res) => {
   try {
     const userId = req.user.uid;
+    // Fetch image by ID from favourites collection
     const ref = db
       .collection(imagesCollection)
       .doc(userId)
@@ -88,10 +97,12 @@ exports.getImageById = async (req, res) => {
   }
 };
 
+// Update an image in user's favourites
 exports.updateImage = async (req, res) => {
   try {
     const userId = req.user.uid;
     const { src, photographer } = req.body;
+    // Update image in favourites collection
     const ref = db
       .collection(imagesCollection)
       .doc(userId)
@@ -104,9 +115,11 @@ exports.updateImage = async (req, res) => {
   }
 };
 
+// Delete an image from user's favourites
 exports.deleteImage = async (req, res) => {
   try {
     const userId = req.user.uid;
+    // Delete image from favourites collection
     const ref = db
       .collection(imagesCollection)
       .doc(userId)

@@ -1,4 +1,4 @@
-# Photos Application
+# Photos App
 
 This project provides a web application for managing images using a Node.js backend and a React frontend. Users can perform CRUD operations on images and shorten image links using external APIs.
 
@@ -79,6 +79,7 @@ The frontend will be accessible at http://localhost:3000.
 - React Router
 - Axios
 - Material-UI
+- toastify
 
 
 

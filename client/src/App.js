@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Layout/Navbar";
 import SignUp from "./components/Auth/SignUp";
 import SignIn from "./components/Auth/SignIn";
 import Home from "./components/Home/Home";

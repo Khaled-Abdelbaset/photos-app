@@ -8,7 +8,6 @@ const BASE_URL = "http://127.0.0.1:8000/api/images";
 export const getFavourites = createAsyncThunk(
   "favourites/getFavourites",
   async () => {
-    console.log(sessionStorage.getItem("token"));
     try {
       const response = await axios.get(`${BASE_URL}`, {
         headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` },

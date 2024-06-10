@@ -2,47 +2,11 @@ const { db } = require("../services/firebase");
 
 const imagesCollection = "favourite_images";
 
-// Middleware to check if image ID exists in user's favourites
-exports.checkID = async (req, res, next, val) => {
-  try {
-    const userId = req.user.uid;
-    const image = await db
-      .collection(imagesCollection)
-      .doc(userId)
-      .collection("images")
-      .doc(val)
-      .get();
-    if (!image.exists) {
-      return res.status(400).json({
-        status: "failed",
-        message: "This image doesn't exist in your favourites collection",
-      });
-    }
-    next();
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
 // Create a new image in user's favourites
 exports.createImage = async (req, res) => {
   try {
     const userId = req.user.uid;
     const { src, photographer } = req.body;
-
-    // Check if image already exists in favourites
-    const image = await db
-      .collection(imagesCollection)
-      .doc(userId)
-      .collection("images")
-      .where("src", "==", src)
-      .get();
-    if (!image.empty) {
-      return res.status(400).json({
-        status: "failed",
-        message: "Image already in your favourites",
-      });
-    }
 
     const newImage = { src, photographer };
     // Add new image to favourites collection

@@ -8,15 +8,13 @@ exports.shortenAndCreateImage = async (req, res) => {
   try {
     const userId = req.user.uid;
     const { src, photographer } = req.body;
-    
+
     // Shorten URL using shareaholic
     // const response = await axios.post(
     //   "https://www.shareaholic.com/api/shortener",
     //   { url: src, apikey: "09e1babaaaa3075d34b5e2dfe246ce71" }
     // );
-    
-    // const shortUrl = response.data.shortUrl;
-    
+
     // Shorten URL using TinyURL API
     const response = await axios.post("https://tinyurl.com/api-create.php", {
       url: src,

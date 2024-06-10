@@ -2,8 +2,7 @@ const { admin } = require("../services/firebase");
 
 // Middleware to authenticate user using Firebase authentication
 const authenticateUser = (req, res, next) => {
-  const token =
-    req.headers.authorization && req.headers.authorization.split(" ")[1];
+  const token = req.headers.authorization?.split(" ")[1] ?? null;
 
   // Check if token exists in the request headers
   if (!token) {

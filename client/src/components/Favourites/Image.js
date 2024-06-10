@@ -19,7 +19,7 @@ const Image = ({ image }) => {
   const handleDeleteImage = async () => {
     try {
       // Dispatch deleteFavourite action to delete the image
-      await dispatch(deleteFavourite(image.id));
+      await dispatch(deleteFavourite(image.id)).unwrap();
       // Show success message
       toast.success("Image deleted successfully");
     } catch (error) {

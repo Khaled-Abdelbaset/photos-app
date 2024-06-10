@@ -22,7 +22,7 @@ const Image = ({ image }) => {
     }
     try {
       // Dispatch addToFavourites action to add image to favourites
-      await dispatch(addToFavourites(image));
+      await dispatch(addToFavourites(image)).unwrap();
       // Show success message
       toast.success("Image Added successfully");
     } catch (error) {
